@@ -32,9 +32,37 @@ int isPrimNum(int n) {
 	if ((i >= n / 2) && (n != 1))
 		return 1;
 }
-
-
 这是比较笨的一个方法，凡是用for语句很多的，一般都是枚举，我觉得for语句不能超过两个。而且出来的是每种可能。。。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <stdio.h>
 #include <math.h>
 
