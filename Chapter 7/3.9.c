@@ -1,26 +1,36 @@
 #include <stdio.h>
 
-int ArmstrongNum(int n);
+#define N1 3
+#define N2 4
+#define N3 (N1 + N2)
+
+void meageSort(int arr1[], int n1, int arr2[], int n2, int arr3[]);
 
 int main()
 {
-	for (int i = 1; i < 1001; ++i) {
-		if (ArmstrongNum(i))
-			printf("阿姆斯特朗数是：%d\n", i);
-	}
-
+	int arr1[N1] = { 1, 2, 5 };
+	int arr2[N2] = { 3, 4, 7, 8 };
+	int arr3[N3] = { 0 };
+	meageSort(arr1, N1, arr2, N2, arr3);
+	for (int i = 0; i < N3; ++i)
+		printf("%d ", arr3[i]);
+	
 	return 0;
 }
 
-int ArmstrongNum(int n) {
-	int sum = 0, remain, origin = n;
-	while (n > 0) {
-		remain = n % 10;
-		sum += remain * remain * remain;
-		n /= 10;
+void meageSort(int arr1[], int n1, int arr2[], int n2, int arr3[])
+{
+	int i = 0, j = 0, k = 0;
+	while ((i < n1) && (j < n2)) {
+		if (arr1[i] < arr2[j])
+			arr3[k++] = arr1[i++];
+		else
+			arr3[k++] = arr2[j++];
 	}
-	if (origin == sum)
-		return 1;
-	else
-		return 0;
+	//i--;
+	while (i < n1)
+		arr3[k++] = arr1[i++];
+	//j--;
+	while (j < n2)
+		arr3[k++] = arr2[j++];
 }

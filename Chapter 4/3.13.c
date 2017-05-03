@@ -1,15 +1,35 @@
 #include <stdio.h>
-#include <math.h>
 
-int main()
+static int count = 0; 
+int func(int num)
+{
+
+	int temp = num - 1;
+	if (temp % 5 == 0 && count < 5)
+	{
+		count++;
+		return func(temp / 5 * 4);
+
+	}
+	else
+		return num;
+}
+
+int main(void)
 {
 	int i;
-	for (i = 1; i < 10000; ++i) {
-		for (int j = 1; j <= 5 && i % 5 == 1 && i / 5 > 0; ++j) {
-			i = (i - 1) / 5 * 4;
+	for (i = 1; i < 40000; i++)
+	{
+		if ((i - 1) % 5 == 0)         //代码优化
+		{
+			count = 0;
+			if (func(i) != -1 && count == 5)
+			{
+				printf("总共有: %d个桃子\n", i); 
+				break;
+			}
 		}
 	}
-	printf("这堆椰子至少有%d个。\n", i);
-
+	system("pause");
 	return 0;
 }

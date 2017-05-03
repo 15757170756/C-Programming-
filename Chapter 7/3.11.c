@@ -1,104 +1,73 @@
 #include <stdio.h>
 #include <math.h>
 
-int isPrimNum(int n);
+#define N 4
+
+int charhex2dec(char chhex[]);
 
 int main()
-{
-	printf("2000以内的哥德巴赫猜想：\n");
-	for (int i = 1; i <= 2000; ++i) {
-		for (int j = 1; j <= 2000; ++j) {
-			for (int k = 1; k <= 2000; ++k) {
-				if ((isPrimNum(i)) && (isPrimNum(j)) &&
-					(k >=4) && (k % 2 == 0))
-					if (i + j == k) {
-						printf("%d + %d = %d\n", i, j, k);
-					}
-				
-			}
-		}
-			
-	}
+{	
+	char chhex[] = "ab10c9";
+	printf("字符型的十六进制数为：%s\n", chhex);
+	int decNum = charhex2dec(chhex);
+	printf("转化为十进制数：%d\n", decNum);
 
 	return 0;
 }
 
-int isPrimNum(int n) {
-	int i;
-	for (i = 2; i <= n / 2; ++i) {
-		if (n % i == 0)
-			return 0;
-	}
-	if ((i >= n / 2) && (n != 1))
-		return 1;
-}
-这是比较笨的一个方法，凡是用for语句很多的，一般都是枚举，我觉得for语句不能超过两个。而且出来的是每种可能。。。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#include <stdio.h>
-#include <math.h>
-
-int isPrimNum(int n);
-void GoldBach(int num);
-
-int main()
+int charhex2dec(char* chhex)
 {
-	printf("2000以内的哥德巴赫猜想：\n");
-	for (int i = 4; i <= 2000; ++i) {
-		for (int j = 2; j <= i / 2; ++j) {
-			if ((i % 2 == 0) && (isPrimNum(j)) && (isPrimNum(i - j))) {
-				printf("%d = %d + %d\n", i, j, i - j);
-				break;
-			}//这里用的就是两个for循环，感觉差不多
-		}
+	int sum = 0;
+	int length = 0;
+	char* temp = chhex;
+	while (*temp != '\0') {
+		length++;
+		temp++;
+	}
+	
+	while (*chhex != '\0' && length > 0) {
+		if ((*chhex >= 'A' && *chhex <= 'F'))
+			sum += (*chhex - '0' - 7) * pow(16, length - 1);
+
+		else if (*chhex >= 'a' && *chhex <= 'f')
+			sum += (*chhex - '0' - 39) * pow(16, length - 1);
+
+		else
+			sum += (*chhex - '0') * pow(16, length - 1);
+
+		length--;
+		chhex++;
 	}
 
-	return 0;
+	return sum;
 }
 
-int isPrimNum(int n) {
-	int i;
-	for (i = 2; i <= n / 2 && (n != 1); ++i) {
-		if (n % i == 0)
-			return 0;
+
+int hex2dec(char ch)
+{
+	switch (ch)
+	{
+	case 'A':
+		return 10;
+		break;
+	case 'B':
+		return 11;
+		break;
+	case 'C':
+		return 12;
+		break;
+	case 'D':
+		return 13;
+		break;
+	case 'E':
+		return 14;
+		break;
+	case 'F':
+		return 15;
+		break;
+	default:
+		break;
 	}
-	//if ((i >= n / 2) && (n != 1))
-	return 1;
 }
 
-void GoldBach(int num) {
-	for (int i = 2; i < num / 2; ++i) {
-		if (isPrimNum(i) && (isPrimNum(num - i))) {
-			printf("%d = %d + %d\n", num, i, num - i);
-			break;
-		}
-	}
-}
+
