@@ -18,7 +18,7 @@ char* Mystrcat(char* dest, const char* src)
 	char* address = dest;
 	assert((dest != NULL) && (src != NULL));
 
-	while (*(dest++) != '\0'); //最后一次判断虽然不成立，但是dest还是++了，所有指向了
+	while (*(dest++) != '\0'); //最后一次判断虽然不成立，但是dest还是++了，所以指向了
 								//‘\0'后面一个
 	while (*dest++ = *src++); //包括这里也一样
 	*dest = '\0';
