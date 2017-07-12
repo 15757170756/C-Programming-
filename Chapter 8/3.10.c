@@ -1,34 +1,27 @@
 #include <stdio.h>
 
-#define N 7
+#define N 10
 
-void insertSort(int a[], int n);
+void fun(int arr[], int n, int startIndx, int num);
 
 int main()
 {
-	int a[N] = { 5, 3, 6, 7, 3, 1, 0 };
-	printf("待排序的数组：");
-	for (int i = 0; i < N; ++i)
-		printf("%d ", a[i]);
-	printf("\n");
-
-	insertSort(a, N);
-
-	printf("排序后的数组：");
-	for (int i = 0; i < N; ++i)
-		printf("%d ", a[i]);
+	int a[N] = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 };
+	int startIndx = 4, num = 5;
+	fun(a, N, startIndx, num);
+	for (int i = 0; i < N; ++i) {
+		printf("%d ", *(a + i));
+	}
 
 	return 0;
 }
 
-
-void insertSort(int a[], int n)
+void fun(int arr[], int n, int startIndx, int num)
 {
-	int i, j, key;
-	for (int i = 1; i < n; ++i) {
-		key = a[i]; //插入排序，假设第一个数是排好序的
-		for (j = i - 1; j >= 0 && a[j] > key; --j) //需要一个j来指向i的前几个数，一次比较
-			a[j + 1] = a[j];
-		a[j+1] = key;
+	for (int i = startIndx - 1, j = startIndx + num - 2, k = 0; 
+		k < num / 2; ++i, --j, k++) {
+		int temp = *(arr + i);
+		*(arr + i) = *(arr + j);
+		*(arr + j) = temp;
 	}
 }

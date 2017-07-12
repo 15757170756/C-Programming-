@@ -1,25 +1,25 @@
 #include <stdio.h>
 
-#define N 7
-
-void stringConvert(char ch[], int n);
+int fun(int a, int b);
 
 int main()
 {
-	char ch[N] = "abcABC";
-	printf("原始字符：%s\n", ch);
-	stringConvert(ch, N);
-	printf("处理后字符：%s\n", ch);
+	int a = 73, b = 25;
+	int c = fun(a, b);
+	printf("%d\n", c);
 
 	return 0;
 }
 
-void stringConvert(char ch[], int n)
+int fun(int a, int b)
 {
-	for (int i = 0; i < n; ++i) {
-		if (ch[i] >= 'A' && ch[i] <= 'Z')
-			ch[i] += 3;
-		else if (ch[i] >= 'a' && ch[i] <= 'z')
-			ch[i] -= 3;
-	}
+	int c;
+	int thousandBit = b / 10;
+	int hundredBit = a / 10;
+	int tenBit = b % 10;
+	int oneBit = a % 10;
+
+	c = 1000 * thousandBit + 100 * hundredBit + 10 * tenBit + oneBit;
+
+	return c;
 }

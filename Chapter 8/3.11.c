@@ -1,73 +1,46 @@
 #include <stdio.h>
-#include <math.h>
 
-#define N 4
+#define M 5
+#define N 60
 
-int charhex2dec(char chhex[]);
+void fun(char ch[][N], int saveNum[]);
 
 int main()
-{	
-	char chhex[] = "ab10c9";
-	printf("字符型的十六进制数为：%s\n", chhex);
-	int decNum = charhex2dec(chhex);
-	printf("转化为十进制数：%d\n", decNum);
+{
+	char ch[M][N] = { "abcd124", " ADF%^&   3", "123Abc ()\"",
+		"   ", "12Ab!@ " };
+	int a[5] = { 0 };
+	fun(ch, a);
 
+	printf("upLetterNum:%d, LowerLetterNum:%d, digitalNum:%d, spaceNum:%d, othersNum:%d\n", a[0],a[1],a[2],a[3],a[4]);
 	return 0;
 }
 
-int charhex2dec(char* chhex)
+void fun(char ch[][N], int saveNum[])
 {
-	int sum = 0;
-	int length = 0;
-	char* temp = chhex;
-	while (*temp != '\0') {
-		length++;
-		temp++;
+	int upLetterNum = 0, LowerLetterNum = 0,
+		digitalNum = 0, spaceNum = 0, othersNum = 0;
+
+	for (int i = 0; i < M; ++i) {
+		char* temp = *(ch + i);
+		for (int j = 0; j < N; ++j) {
+			if (*(temp + j) != '\0') {
+				if (*(temp + j) >= 'A' && *(temp + j) <= 'Z')
+					upLetterNum++;
+				else if (*(temp + j) >= 'a' && *(temp + j) <= 'z')
+					LowerLetterNum++;
+				else if (*(temp + j) >= '0' && *(temp + j) <= '9')
+					digitalNum++;
+				else if (*(temp + j) == ' ')
+					spaceNum++;
+				else
+					othersNum++;
+			}
+		}
 	}
-	
-	while (*chhex != '\0' && length > 0) {
-		if ((*chhex >= 'A' && *chhex <= 'F'))
-			sum += (*chhex - '0' - 7) * pow(16, length - 1);
-
-		else if (*chhex >= 'a' && *chhex <= 'f')
-			sum += (*chhex - '0' - 39) * pow(16, length - 1);
-
-		else
-			sum += (*chhex - '0') * pow(16, length - 1);
-
-		length--;
-		chhex++;
-	}
-
-	return sum;
+	saveNum[0] = upLetterNum;
+	saveNum[1] = LowerLetterNum;
+	saveNum[2] = digitalNum;
+	saveNum[3] = spaceNum;
+	saveNum[4] = othersNum;
 }
-
-
-int hex2dec(char ch)
-{
-	switch (ch)
-	{
-	case 'A':
-		return 10;
-		break;
-	case 'B':
-		return 11;
-		break;
-	case 'C':
-		return 12;
-		break;
-	case 'D':
-		return 13;
-		break;
-	case 'E':
-		return 14;
-		break;
-	case 'F':
-		return 15;
-		break;
-	default:
-		break;
-	}
-}
-
-

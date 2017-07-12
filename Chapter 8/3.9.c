@@ -1,36 +1,26 @@
 #include <stdio.h>
+#include <string.h>
 
-#define N1 3
-#define N2 4
-#define N3 (N1 + N2)
-
-void meageSort(int arr1[], int n1, int arr2[], int n2, int arr3[]);
+void insertSort(char ch[]);
 
 int main()
 {
-	int arr1[N1] = { 1, 2, 5 };
-	int arr2[N2] = { 3, 4, 7, 8 };
-	int arr3[N3] = { 0 };
-	meageSort(arr1, N1, arr2, N2, arr3);
-	for (int i = 0; i < N3; ++i)
-		printf("%d ", arr3[i]);
-	
+	char ch[] = "computer";
+	insertSort(ch);
+	for (int i = 0; i < strlen(ch); ++i)
+		putch(ch[i]);
+
 	return 0;
 }
 
-void meageSort(int arr1[], int n1, int arr2[], int n2, int arr3[])
+void insertSort(char ch[])
 {
-	int i = 0, j = 0, k = 0;
-	while ((i < n1) && (j < n2)) {
-		if (arr1[i] < arr2[j])
-			arr3[k++] = arr1[i++];
-		else
-			arr3[k++] = arr2[j++];
+	int i, j;
+	for (i = 1; i < strlen(ch); ++i) {
+		char temp = *(ch + i);
+		for (j = i - 1; j >= 0 && ch[j] > temp; j--) {
+			*(ch + j + 1) = *(ch + j);
+		}
+		*(ch + j + 1) = temp;
 	}
-	//i--;
-	while (i < n1)
-		arr3[k++] = arr1[i++];
-	//j--;
-	while (j < n2)
-		arr3[k++] = arr2[j++];
 }
