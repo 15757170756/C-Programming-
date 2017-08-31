@@ -78,7 +78,7 @@ void printList(listNode* headNode)
 int main()
 {
 	/* Start with the empty list */
-	struct Node* headNode = NULL;
+	listNode* headNode = NULL;
 	char inputChar;
 	printf("Please input a string and quit with Enter:\n");
 	while ((inputChar = getchar()) != '\n') 
